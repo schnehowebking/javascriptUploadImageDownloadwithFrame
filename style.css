@@ -1,0 +1,105 @@
+.profile-content {
+    position: relative;
+    overflow: auto;
+}
+
+.profile {
+    width: 435px;
+    padding-top: 435px;
+    /* background-image: url(/images/fb-profile.png);*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.name {
+    font-family: 'Tiro Bangla', serif;
+    font-size: 25px;
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    max-width: 78%;
+    font-weight: 600;
+    width: 70%;
+    text-align: end;
+    line-height: 40px;
+}
+
+.profile-picture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover;*/
+}
+
+.wish_text {
+    font-family: 'Tiro Bangla', serif;
+    font-size: 17px;
+    position: absolute;
+    right: 10px;
+    bottom: 37px;
+    /* max-width: 75%; */
+    font-weight: 500;
+    width: 36%;
+    text-align: end;
+    line-height: 17px;
+    color: #fcfcfc;
+}
+
+#preview {
+    display: none;
+}
+
+.transition-effect {
+    transition: all 0.3s ease;
+}
+
+.img-thumbnail {
+    cursor: pointer;
+}
+
+.cropper-container {
+    width: 100% !important;
+    overflow: hidden;
+}
+
+/* css for mobile*/
+@media (max-width: 767px) {
+    .profile {
+        width: 300px;
+        padding-top: 300px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        position: relative;
+    }
+}
+
+#invitation {
+   
+    width: 100%;
+    height: 450px;
+    position: relative;
+}
+
+#invitation img#ggg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 55;
+}
+
+#invitation img#blah {
+    height: 300px;
+    width: 300px;
+    position: relative;
+    z-index: 10;
+    top: 24px;
+    left: 24px;
+    object-fit: cover;
+
+}

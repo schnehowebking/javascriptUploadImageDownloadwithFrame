@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7th Year Celebration of Krishi Bazar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    
+    
+    <section class="bg-white" ng-controller="myCtrl">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 mx-auto">
+                    <div class="row">
+                        <div class="col-md-6 margin-bottom mx-auto">
+                            <h2 class="" style="font-size: 22px; color: black">
+                                <span>Upload your Image To Download With Frame</span>
+                            </h2>
+
+                            <form action="#" method="POST"
+                                enctype="multipart/form-data" class="mt-4">
+                                <input type="hidden" name="_token" value="N1e1bYlICpWeyn8bseyfn1SLVgos4T22DO2FxNKI"
+                                    autocomplete="off" />
+                                <input type="hidden" name="_method" value="POST" />
+                                <div class="mb-3">
+                                    <label>Upload Your Photo</label>
+                                    <input type="file" class="form-control" name="image" id="imgInp" required />
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <div class="col-md-6 margin-bottom mx-auto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="invitation-content">
+                                        <div class="invitation" id="invitation">
+                                            <img id="ggg" src="jj.png" alt="">
+                                            <img src="" class="profile-pic" alt="" id="blah" />
+                                            
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary btn-big btn-main-color mt-3 w-100"
+                                        id="download">
+                                        <i class="uil uil-folder-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="greetingModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                       
+                        <img id="greetingLivePreview" src="" alt="Preview" class="img-fluid w-100" loading="lazy" />
+                        <button id="greetingCropButton" class="btn btn-primary btn-big btn-main-color mt-3 w-100">
+                            <i class="uil uil-crop-alt"></i> Crop Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" >
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+
+    <script>
+        imgInp.onchange = (evt) => {
+            const [file] = imgInp.files;
+            if (file) {
+                blah.src = URL.createObjectURL(file);
+            }
+        };
+        $("#download").on("click", function () {
+
+            html2canvas(document.querySelector("#invitation")).then((canvas) => {
+                canvas.toBlob(function (blob) {
+                    window.saveAs(blob, "krishibazar_wish.jpg");
+                });
+            });
+        });
+
+
+        //crop
+        document.addEventListener("DOMContentLoaded", function () {
+            const imgInp = document.getElementById("imgInp");
+            const image = document.getElementById("greetingLivePreview");
+            const greetingCropButton =
+                document.getElementById("greetingCropButton");
+            const fbProfile = document.getElementById("blah");
+            let cropper;
+
+            imgInp.addEventListener("change", function () {
+                //show modal with image
+                $("#greetingModal").modal("show");
+                const file = imgInp.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    image.src = e.target.result;
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    cropper = new Cropper(image, {
+                        aspectRatio: 1, // You can set the desired aspect ratio
+                        viewMode: 1, // Set the view mode (0, 1, 2, 3)
+                    });
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            greetingCropButton.addEventListener("click", function () {
+                //hide modal with image
+                $("#greetingModal").modal("hide");
+                const croppedData = cropper.getCroppedCanvas().toDataURL();
+                // Display the cropped image on another element
+                fbProfile.src = croppedData;
+                // You can also send `croppedData` to your server or perform any further actions with it.
+            });
+        });
+
+       
+    </script>
+</body>
+</html>
